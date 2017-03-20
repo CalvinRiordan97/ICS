@@ -1,7 +1,7 @@
 package phase3;
 
 public class Ticket {
-	private float ticketID=0;
+	private float ticketID;
 	private String ticketName;
 	private int priority;
 	//True means blocked
