@@ -7,16 +7,64 @@ public class Lane {
 
 	private String name;
 	//If the lane is split into having a local done lane
-	private boolean split;
+	private boolean split = false;
 	//Is it a backlog lane
-	private boolean backlog;
+	private boolean backlog = false;
 	//Is it a done Lane
-	private boolean done;
+	private boolean done = false;
 	//Is it a user generated lane
-	private boolean inProgress;
-
-	public Lane(String name){
-		this.name = name;
+	private boolean userGenerated = false;
+	//If its a in progress lane
+	private boolean inProgress = false;
+	//If it is a ready lane
+	private boolean ready = false;
+	/**
+	 * Creates a lane the type of name you pass in dictates the type of 
+	 * lane you will get 
+	 * If a backlog its a lane
+	 * If a done its a done lane
+	 * If a inProgress its a lane
+	 * If a ready its a ready lane
+	 * If its any other string it is automatically a User Generated lane
+	 * @param name 
+	 * 
+	 */
+	public Lane(String name, int type){
+		if (name.equals("backlog")){
+			backlog = true;
+		}
+		else if (name.equals("done")){
+			done = true;
+		}
+		else if(name.equals("inProgress")){
+			inProgress = true;
+		}
+		else if(name.equals("ready")){
+			this.ready = true;
+		}
+		else
+		{
+			this.name = name;
+			this.userGenerated = true;
+			this.split = true;
+		}
+	}
+	/**
+	 * Allows a user to change the name of a lane
+	 * Can only be done if its a user generated lane.
+	 * 
+	 * @param name The new name of the lane.
+	 * 
+	 * @return The outcome of the operation if true 
+	 * the operation was a success.
+	 */
+	public boolean changeLaneName(String name){
+		boolean outcome = false;
+		if (userGenerated == true){
+			this.name = name;
+			outcome = true;
+		}
+		return outcome;
 	}
 	public boolean addTicketToMain(Ticket t){
 		boolean outcome =false;
@@ -88,7 +136,7 @@ public class Lane {
 	}
 
 
-	
+
 	/**
 	 * Gets a ticket and returns it to the user
 	 * Will search both local done and main lane
@@ -161,8 +209,7 @@ public class Lane {
 			//checking if its not a back log lane
 			if (this.backlog != true){
 				//checking if its not a done lane
-				if (this.done != false){
-
+				if (this.done != true){
 					this.split = true;
 					outcome = true;
 				}
