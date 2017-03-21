@@ -1,14 +1,9 @@
 import java.util.ArrayList;
-/**
-* Gives the user the ability to add a ticket 
-* Remove a ticket
-* Find a ticket
-*/
 public class Lane {
 	//The array list for all the tickets
-	private ArrayList <Ticket> mainLane = new ArrayList();
+	private ArrayList <Ticket> mainLane = new ArrayList<Ticket>();
 	//The array list for all the tickets that are in the local done lane
-	private ArrayList <Ticket> subLane = new ArrayList();
+	private ArrayList <Ticket> subLane = new ArrayList<Ticket>();
 
 	private String name;
 	//If the lane is split into having a local done lane
