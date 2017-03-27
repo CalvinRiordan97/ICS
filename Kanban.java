@@ -23,10 +23,10 @@ public class Kanban{
 	 * @param tn
 	 * @param priority
 	 */
-	Kanban(int id, String tn, int priority){
+	Kanban(int id, String tn/*, int priority*/){
 		this.laneID = id;
 		this.kanbanName=tn;
-		this.priority = priority;
+		//this.priority = priority;
 	}
 	
 	
