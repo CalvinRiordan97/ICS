@@ -1,5 +1,4 @@
-package phase3;
-
+package Model;
 public class Ticket {
 	private float ticketID;
 	private String ticketName;
