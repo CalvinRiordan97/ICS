@@ -20,14 +20,14 @@ public class laneController {
 		return permission;
 	}
 	
-	public  boolean [] createDone(){
+	/*public  boolean [] createDone(){
 		boolean permission[] = l.getBooleanArr();
 		l.setName("Done");
 		permission[0] = false;
 		permission[1] = false;
 		permission[2] = true;
 		return permission;
-	}
+	}*/
 	/**
 	 * If a user enters Backlog a backlog lane will be created 
 	 * @param name
@@ -79,32 +79,31 @@ public class laneController {
 		
 		return x;	
 	}
-	public void sortByPriority(){
+	public Lane sortByPriority(Lane l){
 		//bubble sort
-		ArrayList<Ticket> arr = l.getLaneArr();
-		int length = arr.size()- 1;
-		boolean change = true;
-		
-		int z = -1;
-		while (change == true) {
-			change = false;
-			z++;
-		
-			for (int i = 0; i < length - z; i++) {
-				//Getting a player at the current index and one ahead 
-				Ticket x = arr.get(i);
-				Ticket y = arr.get(i + 1);
+		Ticket t1,t2;
+		int p1,p2;
+		boolean swapped;
 
-				if (x.compareTo(y)) {
-					arr.remove(i);
-					arr.remove(i);
+		do{
+			swapped = false;
+			for(int i=0; i<l.getLaneArr().size()-1; i++){
+				t1 = l.getLaneArr().get(i);
+				p1 = t1.getPriority();
 
-					arr.add(i, y);
-					arr.add((i + 1, x);
-					change = true;
+				t2 = l.getLaneArr().get(i+1);
+				p2 = t2.getPriority();
+
+				if(p1<p2){
+					l.getLaneArr().remove(i);
+					l.getLaneArr().add(i, t2);
+					l.getLaneArr().remove(i+1);
+					l.getLaneArr().add(i+1, t1);
+					swapped = true;
 				}
 			}
-		}
+		}while(swapped == true);
+		return l;
 	}
 }
 /*
