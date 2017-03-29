@@ -81,8 +81,8 @@ public class laneController {
 	}
 	public Lane sortByPriority(Lane l){
 		//bubble sort
-		Ticket t1,t2;
-		int p1,p2;
+		Ticket t1,t2; //tickets
+		int p1,p2; //priority
 		boolean swapped;
 
 		do{
@@ -94,11 +94,11 @@ public class laneController {
 				t2 = l.getLaneArr().get(i+1);
 				p2 = t2.getPriority();
 
-				if(p1<p2){
+				if(p1>p2){
 					l.getLaneArr().remove(i);
-					l.getLaneArr().add(i, t2);
+					l.getLaneArr().add(i, t1);
 					l.getLaneArr().remove(i+1);
-					l.getLaneArr().add(i+1, t1);
+					l.getLaneArr().add(i+1, t2);
 					swapped = true;
 				}
 			}
