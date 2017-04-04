@@ -1,5 +1,10 @@
 package Model;
 import java.util.ArrayList;
+/**
+ * 
+ * @version 1
+ *
+ */
 public class Kanban {
 	private float uniqueID;
 	private String name;
@@ -24,8 +29,9 @@ public class Kanban {
 	}
 	public ArrayList<Lane> getLaneArray(){
 		return arr;
-		
 	}
-	
+	public void setLaneArray(ArrayList<Lane> arr){
+		this.arr = arr;
+	}
 
 }
