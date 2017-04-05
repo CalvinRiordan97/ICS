@@ -3,8 +3,9 @@ package Model;
 public class User {
 	private String userName;
 	private String password;
-	private final String PRODUCT_OWNER = "PO";
-	private final String DEVLOPER = "DEV";
+	public final String PRODUCT_OWNER = "PO";
+	public final String DEVLOPER = "DEV";
+	
 	public String getUserName() {
 		return userName;
 	}

@@ -1,5 +1,6 @@
 package Model;
 import java.util.ArrayList;
+import java.util.LinkedList;
 /**
  * 
  * @version 1
@@ -8,12 +9,13 @@ import java.util.ArrayList;
 public class Kanban {
 	private float uniqueID;
 	private String name;
-	private ArrayList <Lane> arr;
-	
-	public Kanban(String name, float i) {
+	private ArrayList <Lane> laneArray;
+	private ArrayList <User> userArray;
+	public Kanban(String name) {
 		this.name = name;
-		uniqueID = i;
-		arr = new ArrayList<Lane>();
+		uniqueID = 0;
+		laneArray = new ArrayList <Lane>();
+		userArray = new ArrayList <User>();
 	}
 	public float getUniqueID() {
 		return uniqueID;
@@ -28,10 +30,16 @@ public class Kanban {
 		this.name = name;
 	}
 	public ArrayList<Lane> getLaneArray(){
-		return arr;
+		return laneArray;
 	}
 	public void setLaneArray(ArrayList<Lane> arr){
-		this.arr = arr;
+		this.laneArray = arr;
+	}
+	public ArrayList<User> getUserArray(){
+		return userArray;
+	}
+	public void setUserArray(ArrayList<User> arr){
+		this.userArray = arr;
 	}
 
 }
