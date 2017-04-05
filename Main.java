@@ -24,6 +24,7 @@ public class Main extends Application{
 		// TODO Auto-generated method stub
 		kc = new kanbanController(null);
 		launch(args);
+		//
 	}
 	@Override
 	public void start(Stage primaryStage) throws Exception {
