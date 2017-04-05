@@ -1,7 +1,10 @@
 package Controller;
 import java.util.ArrayList;
+import java.util.LinkedList;
+
 import Model.Kanban;
 import Model.Lane;
+import Model.Ticket;
 /**
  * @version  1.0
  * @todo Add functions to move tickets to the lane to the left
@@ -30,7 +33,7 @@ public class kanbanController {
 	 * @return A lane
 	 */
 	public Lane getALane(String name){
-		ArrayList <Lane> arr = kanbanBoard.getLaneArray();
+		ArrayList<Lane> arr = kanbanBoard.getLaneArray();
 		int size = arr.size();
 		boolean found = false;
 		Lane x = null;
@@ -46,23 +49,23 @@ public class kanbanController {
 	 * Creates a default kanban with four lanes
 	*/ 
 	public void createDefaultKanban(){
-		ArrayList <Lane> arr = kanbanBoard.getLaneArray();
-		Lane A = new Lane ();
-		Lane B = new Lane ();
-		Lane C = new Lane ();
-		Lane D = new Lane ();
-		LaneController controlLane = new LaneController(A);
+		ArrayList<Lane> arr = kanbanBoard.getLaneArray();
+		Lane backlog = new Lane ();
+		Lane ready = new Lane ();
+		Lane inProgress = new Lane ();
+		Lane done = new Lane ();
+		LaneController controlLane = new LaneController(backlog);
 		controlLane.createLane("backlog");
-		arr.add(A);
-		controlLane.changeControlTo(B);
+		arr.add(backlog);
+		controlLane.changeControlTo(ready);
 		controlLane.createLane("ready");
-		arr.add(B);
-		controlLane.changeControlTo(C);
+		arr.add(ready);
+		controlLane.changeControlTo(inProgress);
 		controlLane.createLane("in progress");
-		arr.add(C);
-		controlLane.changeControlTo(D);
+		arr.add(inProgress);
+		controlLane.changeControlTo(done);
 		controlLane.createLane("done");
-		arr.add(D);
+		arr.add(done);
 		kanbanBoard.setLaneArray(arr);
 	}
 	
@@ -107,7 +110,7 @@ public class kanbanController {
 	// @ TODO test
 	public boolean removeALane(Lane x){
 		boolean outcome = false;
-		ArrayList <Lane> arr = kanbanBoard.getLaneArray();
+		ArrayList<Lane> arr = kanbanBoard.getLaneArray();
 		for (int i=0; i<arr.size() && outcome == false; i++){
 			Lane l = arr.get(i);
 			if (l.getBooleanArr()[2] == true){
@@ -115,6 +118,26 @@ public class kanbanController {
 					arr.remove(i);
 					outcome = true;
 				}
+			}
+		}
+		return outcome;
+	}
+	//@ TODO TEST please seriously
+	public boolean moveATicket(Ticket t){
+		boolean outcome = false;
+		ArrayList<Lane> arr = kanbanBoard.getLaneArray();
+		for (int i=0; i<arr.size(); i++){
+			Lane lane = arr.get(i);
+			ArrayList <Ticket> tickArr = lane.getLaneArr();
+			int index = tickArr.indexOf(t);
+			if (index >= 0 && i<= arr.size()-1){
+				tickArr.remove(index);
+				lane.setLaneArr(tickArr);
+				lane = arr.get(i+1);
+				tickArr = lane.getLaneArr();
+				tickArr.add(t);
+				lane.setLaneArr(tickArr);
+				
 			}
 		}
 		return outcome;
