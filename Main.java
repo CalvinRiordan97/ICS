@@ -1,3 +1,6 @@
+import Controller.kanbanController;
+import Model.Kanban;
+import Model.Ticket;
 import javafx.application.Application;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
@@ -16,8 +19,10 @@ import javafx.stage.Stage;
 
 public class Main extends Application{
 	Stage window;
+	static kanbanController kc;
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
+		kc = new kanbanController(null);
 		launch(args);
 	}
 	@Override
@@ -73,6 +78,13 @@ public class Main extends Application{
 			Scene s = new Scene(gp,400,200);
 			window.setScene(s);
 			window.show();
+			
+			create.setOnAction(e2->{
+				Kanban kanban = new Kanban(ownerInput.getText());
+				kc = new kanbanController(kanban);
+				kc.createDefaultKanban();
+				window.close();
+			});
 		});
 
 		//when "Add ticket is clicked"
@@ -106,10 +118,9 @@ public class Main extends Application{
 			//when the create button is clicked
 			create.setOnAction(e2->{
 				Ticket newTicket;
-				//String name = nameInput.getText();
 				String ticketTask = taskInput.getText();
-				//boolean x = blocked.isSelected();
 				newTicket = new Ticket(0,ticketTask);
+				newTicket.setTicketID(kc.incrementID());
 			});
 		});
 		
