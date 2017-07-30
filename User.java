@@ -1,11 +1,17 @@
 package Model;
 
-public class User {
+import java.io.Serializable;
+
+public class User implements Serializable{
 	private String userName;
+	private boolean owner;
 	private String password;
 	public final String PRODUCT_OWNER = "PO";
 	public final String DEVLOPER = "DEV";
 	
+	public User(String name, String password){
+		
+	}
 	public String getUserName() {
 		return userName;
 	}
@@ -23,6 +29,12 @@ public class User {
 	}
 	public String getDEVLOPER() {
 		return DEVLOPER;
+	}
+	public void setOwner(boolean b) {
+		owner = b;
+	}
+	public boolean isOwner() {
+		return owner;
 	}
 	
 	

@@ -3,6 +3,7 @@ package Controller;
 import java.util.ArrayList;
 import Model.Lane;
 import Model.Ticket;
+import Model.User;
 /**
  * 
  * @version 1.5
@@ -74,7 +75,7 @@ public class LaneController {
 	public void changeControlTo(Lane lane){
 		this.lane = lane;
 	}
-	private ArrayList<Ticket> sortByPriority(ArrayList<Ticket> arr){
+	public ArrayList<Ticket> sortByPriority(ArrayList<Ticket> arr){
 		//bubble sort
 		Ticket t1,t2;
 		int p1,p2;
@@ -136,17 +137,19 @@ public class LaneController {
 	 * @param ticket The ticket that needs to be removed
 	 * @return A boolean outcome of the operation
 	 */
-	public boolean removeATicket(Ticket ticket){
+	public boolean removeATicket(Ticket ticket, User user){
 		boolean outcome = false;
-		ArrayList<Ticket> arr = lane.getLaneArr();
-		for (int i=0; i<arr.size(); i++){
-			Ticket t = arr.get(i);
-			if (t.getTicketID() == ticket.getTicketID()){
-				arr.remove(i);
-				sortByPriority(arr);
-				lane.setLaneArr(arr);
-				outcome = true;
-			}
+		if (user.isOwner() == true) {
+			ArrayList<Ticket> arr = lane.getLaneArr();
+			for (int i = 0; i < arr.size(); i++) {
+				Ticket t = arr.get(i);
+				if (t.getTicketID() == ticket.getTicketID()) {
+					arr.remove(i);
+					sortByPriority(arr);
+					lane.setLaneArr(arr);
+					outcome = true;
+				}
+			} 
 		}
 		return outcome;
 	}
@@ -158,10 +161,23 @@ public class LaneController {
 	public boolean splitALane(){
 		boolean outcome = false;
 		boolean arr [] = lane.getBooleanArr();
-		if (arr[1] == true){
+		if (arr[0] == true){
 			arr[3] = true;
 			lane.setBooleanArr(arr);
 			outcome = true;
+		}
+		return outcome;
+	}
+	
+	public boolean unSplitLane(){
+		boolean outcome = false;
+		if (lane.getBooleanArr()[3] != false){
+			if (lane.getSubLaneArr().size()>0){
+				
+			}else{
+				lane.getBooleanArr()[3] = true;
+				outcome = true;
+			}
 		}
 		return outcome;
 	}
@@ -177,7 +193,7 @@ public class LaneController {
 	public boolean addATicketToSub(Ticket t){
 		boolean outcome = false;
 		boolean booleanArr [] = lane.getBooleanArr();
-		if (booleanArr[1] == true && booleanArr[3]== true){
+		if (booleanArr[0] == true && booleanArr[3]== true){
 			ArrayList<Ticket> subArray = lane.getSubLaneArr();
 			ArrayList<Ticket> mainArray = lane.getLaneArr();
 			if (mainArray.contains(t)){
@@ -205,7 +221,7 @@ public class LaneController {
 	public boolean moveATicketFromSubToMain(Ticket t){
 		boolean outcome = false;
 		boolean booleanArr [] = lane.getBooleanArr();
-		if (booleanArr[1] == true && booleanArr[3]== true){
+		if (booleanArr[0] == true && booleanArr[3]== true){
 			ArrayList<Ticket> subArray = lane.getSubLaneArr();
 			ArrayList<Ticket> mainArray = lane.getLaneArr();
 			if (subArray.contains(t)){
@@ -242,4 +258,5 @@ public class LaneController {
 		}
 		return outcome;
 	}
+	
 }
