@@ -1,21 +1,25 @@
 package Model;
+import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Dictionary;
+import java.util.HashMap;
 import java.util.LinkedList;
 /**
  * 
  * @version 1
  *
  */
-public class Kanban {
+public class Kanban implements Serializable{
 	private float uniqueID;
 	private String name;
 	private ArrayList <Lane> laneArray;
-	private ArrayList <User> userArray;
+	private ArrayList <User> userList;
+	private User currentUser;
 	public Kanban(String name) {
 		this.name = name;
 		uniqueID = 0;
 		laneArray = new ArrayList <Lane>();
-		userArray = new ArrayList <User>();
+		userList = new ArrayList<User>();
 	}
 	public float getUniqueID() {
 		return uniqueID;
@@ -36,10 +40,20 @@ public class Kanban {
 		this.laneArray = arr;
 	}
 	public ArrayList<User> getUserArray(){
-		return userArray;
+		return userList;
 	}
-	public void setUserArray(ArrayList<User> arr){
-		this.userArray = arr;
+	public void setUserArray(ArrayList<User> list){
+		this.userList = list;
 	}
-
+	public void setCurrentUser(User user){
+		currentUser = user;
+	}
+	public User getCurrentUser(){
+		return currentUser;
+	}
+	public User findAUser(User x){
+		User user = null;
+		userList.indexOf(x);
+		return user;
+	}
 }

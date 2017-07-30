@@ -1,5 +1,8 @@
 package Model;
-public class Ticket {
+
+import java.io.Serializable;
+
+public class Ticket implements Serializable {
 	private float ticketID;
 	private String ticketName;
 	private int priority;
@@ -16,7 +19,7 @@ public class Ticket {
 	 * 	 * @param id
 	 * @param tn
 	 */
-	Ticket(int id, String tn){
+	public Ticket(float id, String tn){
 		this.ticketID = id;
 		this.ticketName=tn;
 		this.priority =0;
@@ -39,7 +42,7 @@ public class Ticket {
 		return ticketID;
 	}
 
-	public void setTicketID(int ticketID) {
+	public void setTicketID(float ticketID) {
 		this.ticketID = ticketID;
 	}
 
@@ -62,7 +65,15 @@ public class Ticket {
 	public boolean isBlockedStatus() {
 		return blockedStatus;
 	}
-
+	public boolean equals(Ticket ticket){
+		boolean outcome = false;
+		if (ticket.getTicketID() == this.ticketID)
+		{
+			outcome = true;
+		}
+		return outcome;
+		
+	}
 	public void setBlockedStatus(boolean blockedStatus) {
 		this.blockedStatus = blockedStatus;
 	}
